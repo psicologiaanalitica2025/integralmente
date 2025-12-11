@@ -509,7 +509,135 @@
         <section class="mb-16">
             <h2 class="text-3xl font-bold text-center text-teal-800 mb-12">Depoimentos de Pacientes</h2>
             <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonials will be dynamically inserted here -->
+                const testimonials = [
+    {
+        id: 1,
+        name: "Ana Silva",
+        rating: 5,
+        text: "A terapia me ajudou a encontrar paz interior após anos de ansiedade. A Dra. Carla é excepcional!",
+        date: "2023-10-15"
+    },
+    {
+        id: 2,
+        name: "Roberto Mendes",
+        rating: 5,
+        text: "O ambiente acolhedor e a escuta empática fizeram toda a diferença na minha recuperação.",
+        date: "2023-09-22"
+    },
+    {
+        id: 3,
+        name: "Camila Oliveira",
+        rating: 5,
+        text: "Excelente serviço! Profissionais dedicados que realmente se importam com o bem-estar do paciente.",
+        date: "2023-11-05"
+    },
+    {
+        id: 4,
+        name: "Fernando Costa",
+        rating: 5,
+        text: "Super recomendo! Meu casamento melhorou significativamente após a terapia de casal.",
+        date: "2023-08-30"
+    },
+    {
+        id: 5,
+        name: "Juliana Santos",
+        rating: 5,
+        text: "Profissionais competentes e ambiente tranquilo. Me sinto acolhida desde a primeira sessão.",
+        date: "2023-10-28"
+    },
+    {
+        id: 6,
+        name: "Marcos Pereira",
+        rating: 5,
+        text: "Tratamento personalizado e eficaz. Graças ao suporte recebido, consegui superar minha depressão.",
+        date: "2023-09-12"
+    },
+    {
+        id: 7,
+        name: "Patrícia Almeida",
+        rating: 5,
+        text: "Transformaram minha vida! Finalmente entendi minhas emoções e aprendi a lidar com elas de forma saudável.",
+        date: "2023-12-03"
+    },
+    {
+        id: 8,
+        name: "Carlos Eduardo",
+        rating: 5,
+        text: "Atendimento impecável e terapeutas extremamente qualificados. Recomendo para todos que buscam equilíbrio emocional.",
+        date: "2023-07-18"
+    },
+    {
+        id: 9,
+        name: "Letícia Ribeiro",
+        rating: 5,
+        text: "Encontrei meu refúgio aqui. Um espaço seguro onde posso ser eu mesma e trabalhar minhas dificuldades com apoio profissional.",
+        date: "2023-11-20"
+    }
+];
+
+// Function to generate star ratings
+function generateStars(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            stars += '<i data-feather="star" class="text-amber-400 fill-current"></i>';
+        } else {
+            stars += '<i data-feather="star" class="text-gray-300"></i>';
+        }
+    }
+    return stars;
+}
+
+// Function to render testimonials
+function renderTestimonials() {
+    const container = document.getElementById('testimonials-container');
+    
+    testimonials.forEach(testimonial => {
+        const testimonialElement = document.createElement('div');
+        testimonialElement.className = 'testimonial-card bg-white p-6 rounded-xl shadow-md';
+        testimonialElement.innerHTML = `
+            <div class="flex items-center mb-4">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16" />
+                <div class="ml-4">
+                    <h4 class="font-bold text-lg text-teal-800">${testimonial.name}</h4>
+                    <div class="flex">
+                        ${generateStars(testimonial.rating)}
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-600 italic">"${testimonial.text}"</p>
+            <p class="text-sm text-gray-400 mt-4">${new Date(testimonial.date).toLocaleDateString('pt-BR')}</p>
+        `;
+        container.appendChild(testimonialElement);
+    });
+    
+    // Reinitialize feather icons after adding new elements
+    feather.replace();
+}
+
+// Form submission handler
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    // Simple validation
+    if (name && email && message) {
+        // In a real application, you would send this data to a server
+        alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+        this.reset();
+    } else {
+        alert('Por favor, preencha todos os campos.');
+    }
+});
+
+// Initialize testimonials when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    renderTestimonials();
+});
             </div>
         </section>
     <!-- Contact Section -->
@@ -1178,4 +1306,5 @@ document.getElementById('brevo-newsletter-form').addEventListener('submit', asyn
 
 </body>
 </html>
+
 
